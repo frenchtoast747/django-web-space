@@ -9,7 +9,3 @@ def int_to_ascii(number):
         
 int_to_ascii.valid_chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-+=._~'
 int_to_ascii.radix = len(int_to_ascii.valid_chars)
-
-
-for i in xrange(999100):
-    print int_to_ascii(i)
