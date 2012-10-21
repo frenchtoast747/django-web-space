@@ -1,0 +1,17 @@
+{% extends 'webspace/base.html' %}
+
+{% block content %}
+  <table>
+    <tr>
+      <th>Filename</th>
+      <th>Uploaded Date</th>
+    </tr>
+    
+    {% for file in files %}
+      <tr>
+        <td><a href='{{ file.get_absolute_url }}'>{{ file.name }}</a></td>
+        <td>{{ file.uploaded_date }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

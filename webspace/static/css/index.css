@@ -1,0 +1,30 @@
+#drop_file{
+    padding:50px 0;
+    font-size:20pt;
+    width:100%;
+    border:#DDD 3px dashed;
+}
+#drop_file span{
+    width:145px;
+    margin-left:auto;
+    margin-right:auto;
+    display:block;
+}
+#dnd{
+    display:none;
+}
+#file_list{
+  width:20%;
+}
+#upload_files{
+  color:rgba( 0,0,0,0 );
+}
+.remove_file{
+  cursor:pointer;
+}
+.filename{
+  width:50%;
+}
+.filesize{
+  width:30%;
+}

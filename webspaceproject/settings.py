@@ -53,6 +53,11 @@ MEDIA_ROOT = ''
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
 MEDIA_URL = ''
 
+# The directory for storing files
+FILES_DIR = os.path.abspath('./webspace/file_storage')
+if not os.path.exists( FILES_DIR ):
+    os.makedirs( FILES_DIR )
+
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
@@ -123,7 +128,9 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
     'webspace',
-    'south',
+    'django_extensions',
+    # 'south',
+    'annoying',
 )
 
 # A sample logging configuration. The only tangible logging

@@ -1,12 +1,39 @@
 {% extends 'webspace/base.html' %}
 {% load static from staticfiles %}
 
+{% block javascript %}
+{{ block.super }}
+<script type='text/javascript'>
+// set constants
+FILE_URL = '{% url index %}';
+USERS_FILES = '{% url displayfilesview %}';
+</script>
+<script type='text/javascript' src='http://code.jquery.com/jquery.min.js'></script>
+<script type='text/javascript' src='http://code.jquery.com/ui/1.9.0/jquery-ui.min.js'></script>
+<script type='text/javascript' src='{% static "js/filehandling.js" %}'></script>
+{% endblock %}
+
+{% block css %}
+{{ block.super }}
+<link rel='stylesheet' type='text/css' href='{% static "css/index.css" %}' />
+<link rel='stylesheet' type='text/css' href='http://code.jquery.com/ui/1.9.0/themes/ui-lightness/jquery-ui.css' />
+{% endblock %}
+
 {% block content %}
-<form action="" method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-  <label for="file">Filename:</label>
-  <input type="file" name="file" id="file" /> 
-  <br />
-  <input type="submit" name="submit" value="Submit" />
-</form>
+
+<a href='{% url displayfilesview %}'>My Files</a>
+
+<div id='drop_file'><span>Drag N Drop</span></div>
+<input id='upload_files' type="file" name="myfiles" multiple="multiple" />
+<table id='file_list'></table>
+<button id='upload_button'>Upload Files</button>
+
+<table id='template_table' class='hidden'>
+  <tr>
+    <td class='filename'></td>
+    <td class='filesize'></td>
+    <td><img class='remove_file' src='{% static "img/remove.png" %}' alt='' /></td>
+  </tr>
+</table>
+
 {% endblock %}
