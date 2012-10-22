@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
     url(r'^accounts/login/$', 'django.contrib.auth.views.login' ),
-    url(r'^accounts/login/$', 'django.contrib.auth.views.logout', name='logout' ),
+    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}, name='logout' ),
     url(r'^accounts/register/$', 'webspace.views.register', name='register'),
 )
 urlpatterns += patterns('webspace.views',
