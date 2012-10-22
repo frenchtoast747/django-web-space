@@ -4,7 +4,7 @@ import os
 # Django Imports
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from django.core.urlresolvers import reverse
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
@@ -73,8 +73,9 @@ def register( request ):
             user.first_name = request.POST[ 'first_name' ]
             user.last_name = request.POST[ 'last_name' ]
             user.save()
+            user = authenticate( username=request.POST[ 'username' ], password=request.POST[ 'password' ] )
             login( request, user )
-            return HttpResponseRedirect( reverse( 'index' ) )
+    return HttpResponseRedirect( reverse( 'index' ) )
 
 
 

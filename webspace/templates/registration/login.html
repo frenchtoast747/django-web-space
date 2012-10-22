@@ -24,7 +24,7 @@
 </form>
 
 <h3>...or Sign Up</h3>
-<form method='post' action=''>
+<form method='post' action='{% url register %}'>
   {% csrf_token %}
   <table>
     <tr>
