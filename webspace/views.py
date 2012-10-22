@@ -20,9 +20,9 @@ from annoying.decorators import render_to
 
 
 def handle_uploaded_file( file, filename, user ):
-    if not os.path.exists( '%s/%s' % ( settings.FILES_DIR, user.pk ) ):
-        os.makedirs( '%s/%s' % ( settings.FILES_DIR, user.pk ) )
-    with open( '%s/%s/%s' % ( settings.FILES_DIR, user.pk, filename ), 'wb+') as destination:
+    if not os.path.exists( '%s/%s' % ( settings.DEFAULT_FILE_STORAGE, user.pk ) ):
+        os.makedirs( '%s/%s' % ( settings.DEFAULT_FILE_STORAGE, user.pk ) )
+    with open( '%s/%s/%s' % ( settings.DEFAULT_FILE_STORAGE, user.pk, filename ), 'wb+') as destination:
         for chunk in file.chunks():
             destination.write( chunk )
     UserFile.objects.create( name=filename, user=user )
@@ -53,7 +53,6 @@ def displayfilesview( request ):
 def deletefile( request, user_id, slug ):
     if request.user.pk == int( user_id ):
         file = UserFile.objects.get( user=request.user, slug=slug )
-        file.deleteRealFile()
         file.delete()
     return HttpResponseRedirect( reverse( 'displayfilesview' ) )
 

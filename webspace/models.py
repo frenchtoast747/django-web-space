@@ -22,16 +22,20 @@ class UserFile( models.Model ):
     def __unicode__( self ):
         return self.name
     
-    def get_absolute_url(self):
-        return '/%s/%s' % ( self.user.pk, self.slug )
+    def get_absolute_url( self ):
+        return '/%s/%s/%s' % ( settings.FILES_DIR_NAME, self.user.pk, self.slug )
     
     def save( self, *args, **kwargs ):
         self.slug = self.name.replace( r' ', '_' )
         super( UserFile, self ).save( *args, **kwargs )
+    
+    def delete( self, *args, **kwargs ):
+        self.deleteRealFile()
+        super( UserFile, self ).delete( *args, **kwargs )
         
     @property
     def filePath( self ):
-        return '%s/%s/%s' % ( settings.FILES_DIR, self.user.pk, self.name )
+        return '%s/%s/%s' % ( settings.DEFAULT_FILE_STORAGE, self.user.pk, self.name )
     
     def getRealFile( self ):
         return open( self.filePath, 'r+' )

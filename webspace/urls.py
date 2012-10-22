@@ -1,4 +1,6 @@
+# Django Imports
 from django.conf.urls import patterns, include, url
+from django.conf import settings
 
 urlpatterns = patterns('',
     url(r'^accounts/login/$', 'django.contrib.auth.views.login' ),
@@ -11,3 +13,10 @@ urlpatterns += patterns('webspace.views',
     url(r'^delete/(?P<user_id>\d+)/(?P<slug>[-_.\w]+)$', 'deletefile', name='deletefile'),
     url(r'^(?P<user_id>\d+)/(?P<slug>[-_.\w]+)$', 'fileview', name='fileview'),
 )
+
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        url(r'^file-storage/(?P<path>.*)$', 'django.views.static.serve', {
+            'document_root': settings.DEFAULT_FILE_STORAGE,
+        }),
+    )

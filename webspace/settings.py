@@ -1,3 +1,8 @@
+# Python Imports
+import os
+
+# Django imports
 from django.conf import settings
 
-FILES_DIR = getattr( settings, "FILES_DIR", settings.MEDIA_ROOT )
+DEFAULT_FILE_STORAGE = getattr( settings, "DEFAULT_FILE_STORAGE", settings.MEDIA_ROOT )
+FILES_DIR_NAME = os.path.basename( DEFAULT_FILE_STORAGE )

@@ -131,7 +131,7 @@ $(document).ready(function(){
             window.location = USERS_FILES
           }
         } ).fail( function( e ){
-          if( filename > 1 ){
+          if( filecount > 1 ){
             alert( "An error has occurred and your files have not been uploaded" );
           }
           else{
