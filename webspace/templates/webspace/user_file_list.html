@@ -1,7 +1,9 @@
 {% extends 'webspace/base.html' %}
 
 {% block content %}
-  <table>
+  <a href='{% url index %}'>Upload</a>
+  
+  <table id='file_list'>
     <tr>
       <th>Filename</th>
       <th>Uploaded Date</th>
@@ -11,6 +13,7 @@
       <tr>
         <td><a href='{{ file.get_absolute_url }}'>{{ file.name }}</a></td>
         <td>{{ file.uploaded_date }}</td>
+        <td><a href='{% url deletefile user_id=file.user.pk slug=file.slug %}'>Delete</a></td>
       </tr>
     {% endfor %}
   </table>

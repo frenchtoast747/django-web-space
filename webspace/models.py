@@ -1,3 +1,6 @@
+# Python Imports
+import os
+
 # Django Imports
 from django.db import models
 from django.contrib.auth.models import User
@@ -25,6 +28,13 @@ class UserFile( models.Model ):
     def save( self, *args, **kwargs ):
         self.slug = self.name.replace( r' ', '_' )
         super( UserFile, self ).save( *args, **kwargs )
+        
+    @property
+    def filePath( self ):
+        return '%s/%s/%s' % ( settings.FILES_DIR, self.user.pk, self.name )
     
     def getRealFile( self ):
-        return open( '%s/%s/%s' % ( settings.FILES_DIR, self.user.pk, self.name ), 'r+' )
+        return open( self.filePath, 'r+' )
+    
+    def deleteRealFile( self ):
+        os.remove( self.filePath )

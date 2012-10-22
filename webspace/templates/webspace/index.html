@@ -21,9 +21,11 @@ USERS_FILES = '{% url displayfilesview %}';
 
 {% block content %}
 
-<a href='{% url displayfilesview %}'>My Files</a>
+Hello {{ user.first_name }}! | 
+<a href='{% url displayfilesview %}'>My Files</a> |
+<a href='{% url logout %}'>Log Out</a>
 
-<div id='drop_file'><span>Drag N Drop</span></div>
+<div id='drop_file'><span>Drop Your Files Here</span></div>
 <input id='upload_files' type="file" name="myfiles" multiple="multiple" />
 <table id='file_list'></table>
 <button id='upload_button'>Upload Files</button>

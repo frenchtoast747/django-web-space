@@ -29,10 +29,10 @@ function fileSizeToStr( size ){
   }
   else if( size > KILOBYTE && size < MEGABYTE ){
     // if the file size is in the range of Kilobytes
-    return size / KILOBYTE + ' KB';
+    return (size / KILOBYTE).toFixed( 1 ) + ' KB';
   }
   else if( size > MEGABYTE ){
-    return size / MEGABYTE + ' MB';
+    return (size / MEGABYTE).toFixed( 1 ) + ' MB';
   }
 }
 
