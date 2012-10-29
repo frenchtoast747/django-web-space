@@ -7,12 +7,15 @@
     <tr>
       <th>Filename</th>
       <th>Uploaded Date</th>
+      <th>Shared?</th>
     </tr>
     
     {% for file in files %}
       <tr>
         <td><a href='{{ file.get_absolute_url }}'>{{ file.name }}</a></td>
         <td>{{ file.uploaded_date }}</td>
+        <td>{% if file.share %}Yes{% else %}No{% endif %}</td>
+        <td><a href='{% url sharefile user_id=file.user.pk slug=file.slug %}'>{% if file.share %}UnShare{% else %}Share{% endif %}</a></td>
         <td><a href='{% url deletefile user_id=file.user.pk slug=file.slug %}'>Delete</a></td>
       </tr>
     {% endfor %}

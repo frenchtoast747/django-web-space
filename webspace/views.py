@@ -20,9 +20,9 @@ from annoying.decorators import render_to
 
 
 def handle_uploaded_file( file, filename, user ):
-    if not os.path.exists( '%s/%s' % ( settings.DEFAULT_FILE_STORAGE, user.pk ) ):
-        os.makedirs( '%s/%s' % ( settings.DEFAULT_FILE_STORAGE, user.pk ) )
-    with open( '%s/%s/%s' % ( settings.DEFAULT_FILE_STORAGE, user.pk, filename ), 'wb+') as destination:
+    if not os.path.exists( '%s/%s' % ( settings.FILE_STORAGE, user.pk ) ):
+        os.makedirs( '%s/%s' % ( settings.FILE_STORAGE, user.pk ) )
+    with open( '%s/%s/%s' % ( settings.FILE_STORAGE, user.pk, filename ), 'wb+') as destination:
         for chunk in file.chunks():
             destination.write( chunk )
     UserFile.objects.create( name=filename, user=user )
@@ -49,11 +49,23 @@ def displayfilesview( request ):
     files = UserFile.objects.filter( user=request.user )
     return { 'files': files }
 
+@render_to( 'webspace/display_shared.html' )
+def displaysharedview( request ):
+    files = UserFile.objects.filter( share=True )
+    return { 'files': files }
+
 @login_required
 def deletefile( request, user_id, slug ):
     if request.user.pk == int( user_id ):
         file = UserFile.objects.get( user=request.user, slug=slug )
         file.delete()
+    return HttpResponseRedirect( reverse( 'displayfilesview' ) )
+
+@login_required
+def sharefile( request, user_id, slug ):
+    if request.user.pk == int( user_id ):
+        file = UserFile.objects.get( user=request.user, slug=slug )
+        file.toggleShare()
     return HttpResponseRedirect( reverse( 'displayfilesview' ) )
 
 def fileview( request, user_id, slug ):

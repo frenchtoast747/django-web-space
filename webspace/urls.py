@@ -10,13 +10,15 @@ urlpatterns = patterns('',
 urlpatterns += patterns('webspace.views',
     url(r'^$', 'index', name='index'),
     url(r'^myfiles/$', 'displayfilesview', name='displayfilesview'),
+    url(r'^shared/$', 'displaysharedview', name='displaysharedview'),
     url(r'^delete/(?P<user_id>\d+)/(?P<slug>[-_.\w]+)$', 'deletefile', name='deletefile'),
+    url(r'^share/(?P<user_id>\d+)/(?P<slug>[-_.\w]+)$', 'sharefile', name='sharefile'),
     url(r'^(?P<user_id>\d+)/(?P<slug>[-_.\w]+)$', 'fileview', name='fileview'),
 )
 
 if settings.DEBUG:
     urlpatterns += patterns('',
         url(r'^file-storage/(?P<path>.*)$', 'django.views.static.serve', {
-            'document_root': settings.DEFAULT_FILE_STORAGE,
+            'document_root': settings.FILE_STORAGE,
         }),
     )

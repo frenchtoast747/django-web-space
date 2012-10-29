@@ -29,3 +29,6 @@
 .filesize{
   width:30%;
 }
+#uploading{
+  display:none;
+}

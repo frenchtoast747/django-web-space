@@ -95,6 +95,14 @@ $(document).ready(function(){
     // upload button handler
     $('#upload_button').click( function( e ){
       e.preventDefault();
+      // show the loading dialog
+      $('#uploading div').dialog({ 
+        modal:true,
+        title:"Uploading Files",
+        minHeight: 0,
+        draggable:false,
+        resizable:false
+      });
       form = new FormData();
       // keep track of the number of files
       // we don't want to send an empty list

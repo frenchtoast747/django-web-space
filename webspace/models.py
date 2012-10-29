@@ -15,6 +15,7 @@ class UserFile( models.Model ):
     name = models.CharField( max_length=100 )
     user = models.ForeignKey( User )
     uploaded_date = models.DateTimeField( auto_now_add=True )
+    share = models.BooleanField( default=False )
     
     class Meta:
         unique_together = ('name', 'user',)
@@ -35,10 +36,14 @@ class UserFile( models.Model ):
         
     @property
     def filePath( self ):
-        return '%s/%s/%s' % ( settings.DEFAULT_FILE_STORAGE, self.user.pk, self.name )
+        return '%s/%s/%s' % ( settings.FILE_STORAGE, self.user.pk, self.name )
     
     def getRealFile( self ):
         return open( self.filePath, 'r+' )
     
     def deleteRealFile( self ):
         os.remove( self.filePath )
+    
+    def toggleShare( self ):
+        self.share = not self.share
+        self.save()

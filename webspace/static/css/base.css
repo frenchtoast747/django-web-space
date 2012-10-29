@@ -12,9 +12,9 @@ a{
   font-size:15pt;
 }
 #file_list{
-  width:500px
+  width:100%;
 }
 #file_list td{
-  width:50%;
+  width:20%;
   text-align:center
 }

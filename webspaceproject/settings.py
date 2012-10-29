@@ -45,13 +45,13 @@ USE_L10N = True
 USE_TZ = True
 
 # The directory for storing files
-DEFAULT_FILE_STORAGE = os.path.abspath('./webspace/file-storage')
-if not os.path.exists( DEFAULT_FILE_STORAGE ):
-    os.makedirs( DEFAULT_FILE_STORAGE )
+FILE_STORAGE = os.path.abspath('./webspace/file-storage')
+if not os.path.exists( FILE_STORAGE ):
+    os.makedirs( FILE_STORAGE )
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = DEFAULT_FILE_STORAGE
+MEDIA_ROOT = FILE_STORAGE
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -139,7 +139,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'webspace',
     'django_extensions',
-    # 'south',
+    'south',
     'annoying',
 )
 
@@ -171,3 +171,8 @@ LOGGING = {
         },
     }
 }
+
+try:
+    from production_settings import *
+except ImportError:
+    pass

@@ -16,13 +16,14 @@ USERS_FILES = '{% url displayfilesview %}';
 {% block css %}
 {{ block.super }}
 <link rel='stylesheet' type='text/css' href='{% static "css/index.css" %}' />
-<link rel='stylesheet' type='text/css' href='http://code.jquery.com/ui/1.9.0/themes/ui-lightness/jquery-ui.css' />
+<link rel='stylesheet' type='text/css' href='http://code.jquery.com/ui/1.9.0/themes/overcast/jquery-ui.css' />
 {% endblock %}
 
 {% block content %}
 
 Hello {{ user.first_name }}! | 
 <a href='{% url displayfilesview %}'>My Files</a> |
+<a href='{% url displaysharedview %}'>Shared Repository</a> |
 <a href='{% url logout %}'>Log Out</a>
 
 <div id='drop_file'><span>Drop Your Files Here</span></div>
@@ -37,5 +38,7 @@ Hello {{ user.first_name }}! |
     <td><img class='remove_file' src='{% static "img/remove.png" %}' alt='' /></td>
   </tr>
 </table>
+
+<div id='uploading'><div><img src='{% static "img/loading.gif" %}' alt='' /></div></div>
 
 {% endblock %}
